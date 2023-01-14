@@ -1,0 +1,18 @@
+        
+#include "Cat.hpp"
+
+
+Cat :: Cat(void) : Animal("Cat")
+{
+    std::cout << this->_type << " CONSTRUCTOR CALLED !!!" << std::endl;
+}
+
+Cat :: ~Cat()
+{
+    std :: cout << this->_type << " DESTRUCTOR CALLED !!!" << std::endl;
+}
+
+void Cat :: makeSound() const
+{
+    std :: cout << "Meeeoowwww !!" << std::endl;
+}

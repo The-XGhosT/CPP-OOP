@@ -1,0 +1,131 @@
+Quis
+
+1  What is an exception in C++, and how is it different from an error?
+2  How do you throw an exception in C++?
+3  How do you catch an exception in C++?
+4  What is the difference between a synchronous and an asynchronous exception in C++?
+5  What is the base class for all exceptions in C++?
+6  What is an exception specification in C++? and why it's not recommended to use it anymore?
+7  How can you re-throw an exception in C++?
+8  What is the difference between an exception and an assertion in C++?
+9  How can you create a custom exception class in C++?
+10 What is the difference between catch-by-value and catch-by-reference when catching exceptions?
+
+
+
+
+answers
+
+What is an exception in C++, and how is it different from an error?
+An exception is an event that occurs during the execution of a program that disrupts the normal flow of control. It is used to handle run-time errors in a way that is separate from the normal flow of control. An error, on the other hand, is a problem that occurs during the compilation of a program and prevents it from being executed.
+
+How do you throw an exception in C++?
+You can throw an exception in C++ using the throw keyword, followed by the exception object. For example:
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+if (x == 0) {
+    throw std::runtime_error("x cannot be zero");
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+How do you catch an exception in C++?
+You can catch an exception in C++ using a try-catch block. The try block contains the code that might throw an exception, and the catch block contains the code that will handle the exception.
+For example:
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+try {
+    // code that might throw an exception
+}
+catch (const exceptionType &e) {
+    // code to handle the exception
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+What is the difference between a synchronous and an asynchronous exception in C++?
+A synchronous exception is one that is thrown by a program and immediately handled, such as an out-of-bounds array access.
+An asynchronous exception is one that occurs outside of the normal flow of control of the program, such as a keyboard interrupt or a timer expiration.
+
+What is the base class for all exceptions in C++?
+The base class for all exceptions in C++ is std::exception
+
+What is an exception specification in C++? and why it's not recommended to use it anymore?
+An exception specification is a list of exceptions that a function is declared to throw. It is a feature in C++ that allows you to specify what types of exceptions a function may throw, it's usually specified in the function signature. This feature is not recommended to use anymore because it's not reliable, it's hard to maintain and doesn't provide any real benefits.
+
+How can you re-throw an exception in C++?
+You can re-throw an exception in C++ using the throw; statement without any arguments inside the catch block, this will throw the same exception again.
+For example:
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+try {
+    // code that might throw an exception
+} catch (const exceptionType &e) {
+    // code to handle the exception
+    throw;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+What is the difference between an exception and an assertion in C++?
+An exception is a mechanism for handling run-time errors that occur during the execution of a program, it's typically used to handle unexpected events or invalid input.
+An assertion, on the other hand, is a statement that tests a boolean condition at runtime and terminates the program with an error message if the condition is false. The main difference is that an exception can be caught, where the control can be handled to prevent the program from exiting, while an assertion will terminate the program in any case.
+
+How can you create a custom exception class in C++?
+You can create a custom exception class in C++ by defining a new class that inherits from the std::exception class or one of its derivatives. This class should override the what()
+member function to provide an appropriate error message. Here is an example:
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class MyException: public std::exception
+{
+public:
+    const char* what() const throw()
+    {
+        return "MyException occurred";
+    }
+};
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+In this example, the what() function returns a string containing the error message associated with the exception.
+You can then use this class to throw an exception by creating an object of the class
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+void doSomething()
+{
+    // ...
+    if (something_is_wrong)
+    {
+        throw MyException();
+    }
+    // ...
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+What is the difference between catch-by-value and catch-by-reference when catching exceptions?
+When you catch an exception in C++, you can catch it by value or by reference.
+Catching an exception by value creates a copy of the exception object, whereas catching by reference catches the exception by its memory address.
+Catching by value is useful if you want to modify the exception object or if you don't have any resources associated with the original object that need to be freed.
+Catching by reference can be used to avoid unnecessary object copies, it also allows you to access more information of the exception since it's the original exception object.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+try {
+    // code that might throw an exception
+} catch (const exceptionType &e) {
+    // catch by reference
+} catch (exceptionType e) {
+    // catch by value
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+I hope tha help you to have a better understanding about exceptions in C++.
